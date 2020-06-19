@@ -4,6 +4,14 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>HealthKitData.Core</AssemblyName>
     <RootNamespace>HealthKitData.Core</RootNamespace>
+
+    <PackageId>HealthKitData.Core</PackageId>
+    <PackageVersion>0.1</PackageVersion>
+    <Description>Library for handling HealthKit data and exporting it to Excel/CSV. Also facilitates loading a HealthKit "data export" file.</Description>
+    <Authors>Jon Fuller</Authors>
+    <PackageTags>HealthKit Fitness iOS Xamarin Excel CSV</PackageTags>
+    <PackageProjectUrl>https://github.com/jonfuller/HealthKitData</PackageProjectUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>
