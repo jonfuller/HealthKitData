@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30128.36
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthKitData.Core", "HealthkitData.Core\HealthKitData.Core.csproj", "{09E54AB1-3A1E-4B85-B478-ADF50199080A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthKitData.Core", "HealthKitData.Core\HealthKitData.Core.csproj", "{09E54AB1-3A1E-4B85-B478-ADF50199080A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
