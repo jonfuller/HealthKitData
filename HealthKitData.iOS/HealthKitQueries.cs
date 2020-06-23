@@ -8,7 +8,6 @@ using HealthKitData.Core;
 using LanguageExt;
 using LanguageExt.SomeHelp;
 using NodaTime;
-using Xamarin.Forms.Platform.iOS;
 
 using static LanguageExt.Prelude;
 
@@ -64,9 +63,10 @@ namespace HealthKitData.iOS
 
         private static Task<Option<IEnumerable<TOut>>> RunQuery<TOut>(HKHealthStore store, HKSampleType type, DateInterval dates, Func<HKSample, TOut> mapper)
         {
+
             var samplePredicate = HKQuery.GetPredicateForSamples(
-                dates.Start.ToDateTimeUnspecified().ToNSDate(),
-                dates.End.ToDateTimeUnspecified().ToNSDate(),
+                dates.Start.ToNSDate(),
+                dates.End.ToNSDate(),
                 HKQueryOptions.None);
 
             var theResults = new Option<IEnumerable<TOut>>();
