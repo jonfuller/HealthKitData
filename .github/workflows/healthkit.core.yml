@@ -20,7 +20,7 @@ jobs:
     - name: Install dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build --configuration Release --no-restore
+      run: dotnet build HealthKitData.Core/HealthKitData.Core.csproj --configuration Release --no-restore
     - name: Publish NuGet
       uses: brandedoutcast/publish-nuget@v2.5.2
       with:
