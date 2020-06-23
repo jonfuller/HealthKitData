@@ -16,7 +16,7 @@
 
   <ItemGroup>
     <PackageReference Include="EPPlus" Version="4.5.3.2" />
-    <PackageReference Include="NodaTime" Version="2.4.6" />
+    <PackageReference Include="NodaTime" Version="3.0.0" />
     <PackageReference Include="UnitsNet" Version="4.32.0" />
   </ItemGroup>
 
