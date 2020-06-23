@@ -6,7 +6,7 @@
     <RootNamespace>HealthKitData.Core</RootNamespace>
 
     <PackageId>HealthKitData.Core</PackageId>
-    <Version>0.1</Version>
+    <Version>0.1.0</Version>
     <Description>Library for handling HealthKit data and exporting it to Excel/CSV. Also facilitates loading a HealthKit "data export" file.</Description>
     <Authors>Jon Fuller</Authors>
     <PackageTags>HealthKit Fitness iOS Xamarin Excel CSV</PackageTags>
