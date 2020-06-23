@@ -18,7 +18,7 @@ namespace HealthKitData.Core.DataExport
                 {
                     var isRecord = e.Item1 == "Record";
                     var record = isRecord ? RecordParser.ParseRecord(e.Item2) : null;
-                    var workout = isRecord ? null : WorkoutParser.Dictionary.ParseWorkout(e.Item2);
+                    var workout = isRecord ? null : WorkoutParser.ParseWorkout(e.Item2);
                     return new {isRecord, record, workout};
                 })
                 .Aggregate(Tuple.Create(new List<Record>(), new List<Workout>()), (acc, item) =>
