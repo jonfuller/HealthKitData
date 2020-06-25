@@ -44,7 +44,7 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    if: ${{ startsWith(github.ref ==  env.RELEASE_TAG_PREFIX)}}
+    if: startsWith(github.ref ==  env.RELEASE_TAG_PREFIX)
 
     steps:
     - name: Setup .NET Core
