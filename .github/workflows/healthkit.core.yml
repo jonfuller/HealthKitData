@@ -44,7 +44,7 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    if: startsWith(github.ref ==  $RELEASE_TAG_PREFIX)
+    if: startsWith(github.ref == 'release-')
 
     steps:
     - name: Setup .NET Core
@@ -62,7 +62,7 @@ jobs:
 
     runs-on: macos-latest
 
-    if: startsWith(github.ref ==  $RELEASE_TAG_PREFIX)
+    if: startsWith(github.ref == 'release-')
 
     steps:
     - name: Pack
