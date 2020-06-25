@@ -6,8 +6,12 @@ on:
   pull_request:
     branches: [ master ]
 
+env:
+  RELEASE_TAG_PREFIX: release-
+
 jobs:
-  build:
+  build-core:
+    name: Build Core
 
     runs-on: ubuntu-latest
 
@@ -20,10 +24,48 @@ jobs:
     - name: Install dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build HealthKitData.Core/HealthKitData.Core.csproj --configuration Release --no-restore
-    - name: Publish NuGet
-      uses: brandedoutcast/publish-nuget@v2.5.2
+      run: nuget push HealthKitData.Core/bin/Release/**/*.nupkg -Source https://api.nuget.org/v3/index.json
+
+  build-ios:
+    name: Build iOS
+    
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install dependencies
+      run: nuget restore
+    - name: Build
+      run: msbuild HealthKitData.iOS/HealthKitData.iOS.csproj /verbosity:normal /t:Rebuild
+
+  publish-nuget-core:
+    name: Publish NuGet
+    needs: [build-core, build-ios] # only publish if both builds succeeded
+
+    runs-on: ubuntu-latest
+
+    if: ${{ startsWith(github.ref ==  env.RELEASE_TAG_PREFIX)}}
+
+    steps:
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
       with:
-        PROJECT_FILE_PATH: HealthKitData.Core/HealthKitData.Core.csproj
-        NUGET_KEY: ${{secrets.NUGET_API_KEY}}
-        NUGET_SOURCE: https://api.nuget.org
+        dotnet-version: 3.1.101
+    - name: Pack
+      run: dotnet pack HealthKitData.Core/HealthKitData.Core.csproj --configuration=Release
+    - name: Publish
+      run: nuget push HealthKitData.Core/**/*.nupkg -Source https://api.nuget.org -ApiKey ${{ secrets.NUGET_API_KEY }}
+
+  publish-nuget-ios:
+    name: Publish NuGet
+    needs: [build-core, build-ios] # only publish if both builds succeeded
+
+    runs-on: macos-latest
+
+    if: ${{ startsWith(github.ref ==  env.RELEASE_TAG_PREFIX)}}
+
+    steps:
+    - name: Pack
+      run: msbuild HealthKitData.iOS/HealthKitData.iOS.csproj -p:Configuration=Release -t:Pack
+    - name: Publish
+      run: nuget push HealthKitData.iOS/**/*.nupkg -Source https://api.nuget.org -ApiKey ${{ secrets.NUGET_API_KEY }}
