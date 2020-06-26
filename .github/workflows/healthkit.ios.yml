@@ -1,0 +1,34 @@
+name: HealthKitData.iOS
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build-ios:
+    name: Build iOS
+    
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install dependencies
+      run: nuget restore
+    - name: Build
+      run: msbuild HealthKitData.iOS/HealthKitData.iOS.csproj /verbosity:normal /t:Rebuild
+
+  publish-nuget-ios:
+    name: Publish NuGet
+    needs: [build-ios] # only publish if build succeeds
+
+    runs-on: macos-latest
+
+    if: startsWith(github.ref, 'release-ios-')
+
+    steps:
+    - name: Pack
+      run: msbuild HealthKitData.iOS/HealthKitData.iOS.csproj -p:Configuration=Release -t:Pack
+    - name: Publish
+      run: nuget push HealthKitData.iOS/**/*.nupkg -Source https://api.nuget.org -ApiKey ${{ secrets.NUGET_API_KEY }}

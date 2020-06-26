@@ -1,13 +1,10 @@
-name: Build & NuGet Core
+name: HealthKitData.Core
 
 on:
   push:
     branches: [ master ]
   pull_request:
     branches: [ master ]
-
-env:
-  RELEASE_TAG_PREFIX: release-
 
 jobs:
   build-core:
@@ -26,25 +23,13 @@ jobs:
     - name: Build
       run: dotnet build HealthKitData.Core/HealthKitData.Core.csproj
 
-  build-ios:
-    name: Build iOS
-    
-    runs-on: macos-latest
-
-    steps:
-    - uses: actions/checkout@v2
-    - name: Install dependencies
-      run: nuget restore
-    - name: Build
-      run: msbuild HealthKitData.iOS/HealthKitData.iOS.csproj /verbosity:normal /t:Rebuild
-
   publish-nuget-core:
     name: Publish NuGet
-    needs: [build-core, build-ios] # only publish if both builds succeeded
+    needs: [build-core] # only publish if build succeeds
 
     runs-on: ubuntu-latest
 
-    if: startsWith(github.ref, 'release-')
+    if: startsWith(github.ref, 'release-core-')
 
     steps:
     - name: Setup .NET Core
@@ -55,17 +40,3 @@ jobs:
       run: dotnet pack HealthKitData.Core/HealthKitData.Core.csproj --configuration=Release
     - name: Publish
       run: nuget push HealthKitData.Core/**/*.nupkg -Source https://api.nuget.org -ApiKey ${{ secrets.NUGET_API_KEY }}
-
-  publish-nuget-ios:
-    name: Publish NuGet
-    needs: [build-core, build-ios] # only publish if both builds succeeded
-
-    runs-on: macos-latest
-
-    if: startsWith(github.ref, 'release-')
-
-    steps:
-    - name: Pack
-      run: msbuild HealthKitData.iOS/HealthKitData.iOS.csproj -p:Configuration=Release -t:Pack
-    - name: Publish
-      run: nuget push HealthKitData.iOS/**/*.nupkg -Source https://api.nuget.org -ApiKey ${{ secrets.NUGET_API_KEY }}
