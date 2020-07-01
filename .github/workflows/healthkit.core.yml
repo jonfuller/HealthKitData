@@ -32,7 +32,7 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    if: startsWith(github.ref, 'release-core-')
+    if: startsWith(github.ref, 'refs/tags/release-core-')
 
     steps:
     - name: Setup .NET Core

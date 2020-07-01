@@ -28,7 +28,7 @@ jobs:
 
     runs-on: macos-latest
 
-    if: startsWith(github.ref, 'release-ios-')
+    if: startsWith(github.ref, 'refs/tags/release-ios-')
 
     steps:
     - name: Pack
