@@ -5,7 +5,7 @@ on:
     branches: [ master ]
   pull_request:
     branches: [ master ]
-    create:
+  create:
 
 jobs:
   build-ios:
@@ -19,6 +19,8 @@ jobs:
       run: nuget restore
     - name: Build
       run: msbuild HealthKitData.iOS/HealthKitData.iOS.csproj /verbosity:normal /t:Rebuild
+    - name: Echo
+      run: echo ${{ github.ref }}
 
   publish-nuget-ios:
     name: Publish NuGet

@@ -23,6 +23,8 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build HealthKitData.Core/HealthKitData.Core.csproj
+    - name: Echo
+      run: echo ${{ github.ref }}
 
   publish-nuget-core:
     name: Publish NuGet
