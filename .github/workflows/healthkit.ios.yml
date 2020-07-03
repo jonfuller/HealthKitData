@@ -5,7 +5,6 @@ on:
     branches: [ master ]
   pull_request:
     branches: [ master ]
-  create:
 
 jobs:
   build-ios:
@@ -15,24 +14,17 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+
     - name: Install dependencies
       run: nuget restore
+
     - name: Build
       run: msbuild HealthKitData.iOS/HealthKitData.iOS.csproj /verbosity:normal /t:Rebuild
-    - name: Echo
-      run: echo ${{ github.ref }}
 
-  publish-nuget-ios:
-    name: Publish NuGet
-    needs: [build-ios] # only publish if build succeeds
-
-    runs-on: macos-latest
-
-    if: startsWith(github.ref, 'refs/tags/release-ios-')
-
-    steps:
-    - uses: actions/checkout@v2
     - name: Pack
       run: msbuild HealthKitData.iOS/HealthKitData.iOS.csproj -p:Configuration=Release -t:Pack
-    - name: Publish
-      run: nuget push HealthKitData.iOS/**/*.nupkg -Source https://api.nuget.org -ApiKey ${{ secrets.NUGET_API_KEY }}
+
+    - uses: actions/upload-artifact@v2
+      with:
+        name: HealthKitData.iOS.nupkg
+        path: HealthKitData.iOS/**/*.nupkg
