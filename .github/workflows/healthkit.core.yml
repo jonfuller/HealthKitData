@@ -32,7 +32,7 @@ jobs:
 
     - uses: actions/upload-artifact@v2
       with:
-        name: HealthKitData.Core.nupkg
+        name: nupkg
         path: HealthKitData.Core/**/*.nupkg
 
   release:
@@ -50,7 +50,7 @@ jobs:
 
     - uses: actions/download-artifact@v2
       with:
-        name: HealthKitData.Core.nupkg
+        name: nupkg
 
     - name: Publish
       run: nuget push /**/*.nupkg -Source https://api.nuget.org
