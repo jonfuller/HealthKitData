@@ -51,4 +51,4 @@ jobs:
         name: nupkg
 
     - name: Publish
-      run: nuget push /**/*.nupkg -Source https://api.nuget.org
+      run: nuget push /**/*.nupkg -Source https://www.nuget.org
