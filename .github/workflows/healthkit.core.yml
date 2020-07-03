@@ -10,7 +10,6 @@ on:
 jobs:
   build-core:
     name: Build Core
-
     runs-on: ubuntu-latest
 
     steps:
@@ -37,9 +36,8 @@ jobs:
 
   release:
     name: Release
-
+    needs: build-core
     runs-on: ubuntu-latest
-
     if: startsWith(github.ref, 'refs/tags/release-core-')
 
     steps:
