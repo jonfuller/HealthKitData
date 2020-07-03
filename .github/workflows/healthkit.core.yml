@@ -5,6 +5,7 @@ on:
     branches: [ master ]
   pull_request:
     branches: [ master ]
+  create:
 
 jobs:
   build-core:
@@ -33,3 +34,23 @@ jobs:
       with:
         name: HealthKitData.Core.nupkg
         path: HealthKitData.Core/**/*.nupkg
+
+  release:
+    name: Release
+
+    runs-on: ubuntu-latest
+
+    if: startsWith(github.ref, 'refs/tags/release-core-')
+
+    steps:
+    - name: Setup NuGet.exe for use with actions
+      uses: NuGet/setup-nuget@v1.0.2
+      with:
+        nuget-api-key: ${{ secrets.NUGET_API_KEY }}
+
+    - uses: actions/download-artifact@v2
+      with:
+        name: HealthKitData.Core.nupkg
+
+    - name: Publish
+      run: nuget push /**/*.nupkg -Source https://api.nuget.org
