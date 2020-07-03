@@ -8,7 +8,7 @@ on:
   create:
 
 jobs:
-  build-core:
+  build:
     name: Build Core
     runs-on: ubuntu-latest
 
