@@ -1,4 +1,4 @@
-name: CI - HealthKitData.Core
+name: HealthKitData.Core
 
 on:
   push:
