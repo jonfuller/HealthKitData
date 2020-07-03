@@ -1,11 +1,10 @@
-name: HealthKitData.Core
+name: CI - HealthKitData.Core
 
 on:
   push:
     branches: [ master ]
   pull_request:
     branches: [ master ]
-  create:
 
 jobs:
   build-core:
@@ -15,32 +14,27 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.101
+
+    - name: Setup NuGet.exe for use with actions
+      uses: NuGet/setup-nuget@v1.0.2
+      with:
+        nuget-api-key: ${{ secrets.NUGET_API_KEY }}
+
     - name: Install dependencies
       run: dotnet restore
+
     - name: Build
       run: dotnet build HealthKitData.Core/HealthKitData.Core.csproj
-    - name: Echo
-      run: echo ${{ github.ref }}
 
-  publish-nuget-core:
-    name: Publish NuGet
-    needs: [build-core] # only publish if build succeeds
-
-    runs-on: ubuntu-latest
-
-    if: startsWith(github.ref, 'refs/tags/release-core-')
-
-    steps:
-    - uses: actions/checkout@v2
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 3.1.101
     - name: Pack
       run: dotnet pack HealthKitData.Core/HealthKitData.Core.csproj --configuration=Release
-    - name: Publish
-      run: nuget push HealthKitData.Core/**/*.nupkg -Source https://api.nuget.org -ApiKey ${{ secrets.NUGET_API_KEY }}
+
+    - uses: actions/upload-artifact@v2
+      with:
+        name: HealthKitData.Core.nupkg
+        path: HealthKitData.Core/**/*.nupkg
