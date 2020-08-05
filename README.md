@@ -7,9 +7,15 @@ HealthKit Data Manipulation for .NET
 
 A .NET Standard library for data processing and report generation for data exports from Apple HealthKit.
 
+![HealthKitData.Core](https://github.com/jonfuller/HealthKitData/workflows/HealthKitData.Core/badge.svg)
+![Nuget](https://img.shields.io/nuget/v/HealthKitData.Core?style=flat)
+
 ### HealthKitData.iOS
 
 A Xamarin.iOS library for querying data directly from HealthKit on the iOS mobile device.
+
+![HealthKitData.iOS](https://github.com/jonfuller/HealthKitData/workflows/HealthKitData.iOS/badge.svg)
+![Nuget](https://img.shields.io/nuget/v/HealthKitData.iOS?style=flat)
 
 ## Usage
 
