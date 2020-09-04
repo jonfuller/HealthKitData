@@ -19,7 +19,7 @@ namespace HealthKitData.iOS
                 SourceName = workout.Source.Name,
                 EndDate = endDate,
                 StartDate = startDate,
-                Duration = Duration.FromMinutes(workout.Duration),
+                Duration = Duration.FromSeconds(workout.Duration),
                 Distance = workout.TotalDistance.Apply(Optional).Match(
                     Some: d => Length.FromMeters(workout.TotalDistance.GetDoubleValue(HKUnit.Meter)),
                     None: () => Length.Zero),
