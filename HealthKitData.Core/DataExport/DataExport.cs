@@ -2,13 +2,14 @@
 using System.IO;
 using System.Linq;
 using HealthKitData.Core.Excel;
+using NodaTime;
 using OfficeOpenXml;
 
 namespace HealthKitData.Core.DataExport
 {
     public static class DataExport
     {
-        public static byte[] CreateExcelReport(byte[] exportZip, Excel.Settings.Settings settings, IEnumerable<ExcelWorksheet> customSheets)
+        public static byte[] CreateExcelReport(byte[] exportZip, Excel.Settings.Settings settings, IEnumerable<ExcelWorksheet> customSheets, DateTimeZone zone)
         {
             using (var inputStream = new MemoryStream(exportZip))
             using (var outputStream = new MemoryStream())
@@ -20,7 +21,7 @@ namespace HealthKitData.Core.DataExport
                         entry => new XmlReaderExportLoader(entry.Open()))
                    .FirstOrDefault();
 
-                ExcelReport.BuildReport(loader.Records, loader.Workouts, excelFile.Workbook, settings, customSheets);
+                ExcelReport.BuildReport(loader.Records, loader.Workouts, excelFile.Workbook, settings, zone, customSheets);
 
                 excelFile.SaveAs(outputStream);
 
