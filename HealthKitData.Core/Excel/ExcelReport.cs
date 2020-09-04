@@ -9,11 +9,8 @@ namespace HealthKitData.Core.Excel
 {
     public static class ExcelReport
     {
-        public static void BuildReport(IList<Record> records, IList<Workout> workouts, ExcelWorkbook workbook, Settings.Settings settings, IEnumerable<ExcelWorksheet> customSheets)
+        public static void BuildReport(IList<Record> records, IList<Workout> workouts, ExcelWorkbook workbook, Settings.Settings settings, DateTimeZone zone, IEnumerable<ExcelWorksheet> customSheets)
         {
-            var edt = DateTimeZone.ForOffset(Offset.FromHours(-5));
-            var zone = edt;
-
             BuilderFactory.GetBuilders(settings, zone, records, workouts)
                 .Select(b => new { b.sheetName, b.builder })
                 .AsParallel().AsOrdered()
