@@ -11,6 +11,8 @@ namespace HealthKitData.Core.DataExport
     {
         public static byte[] CreateExcelReport(byte[] exportZip, Excel.Settings.Settings settings, IEnumerable<ExcelWorksheet> customSheets, DateTimeZone zone)
         {
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
             using (var inputStream = new MemoryStream(exportZip))
             using (var outputStream = new MemoryStream())
             using (var excelFile = new ExcelPackage())
