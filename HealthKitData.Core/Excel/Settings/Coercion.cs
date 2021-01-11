@@ -38,7 +38,7 @@ namespace HealthKitData.Core.Excel.Settings
             }
             if (targetType == typeof(CustomSheetsPlacement))
             {
-                return CoerceEnum((string) value, CustomSheetsPlacement.Last);
+                return CoerceEnum(value.ToString(), CustomSheetsPlacement.Last);
             }
 
             return CoerceString(value);
