@@ -24,12 +24,9 @@ namespace HealthKitData.Core.Excel.Settings
             get
             {
                 var settings = new Settings();
-                var settingsLookup = settings.ToDictionary(s => s.Name, s => s);
                 SettingProps.ForEach(s =>
                 {
-                    var defaultValue = settingsLookup[s.Item2.Name].DefaultValue;
-
-                    s.Item1.SetValue(settings, defaultValue);
+                    settings.SetValue(s.Item1.Name, s.Item2.DefaultValue);
                 });
 
                 return settings;
