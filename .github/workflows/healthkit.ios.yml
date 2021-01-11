@@ -38,7 +38,7 @@ jobs:
 
     steps:
     - name: Setup NuGet.exe for use with actions
-      uses: NuGet/setup-nuget@v1.0.2
+      uses: NuGet/setup-nuget@v1.0.5
       with:
         nuget-api-key: ${{ secrets.NUGET_API_KEY }}
 
