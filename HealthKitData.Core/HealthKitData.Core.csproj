@@ -15,9 +15,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="EPPlus" Version="5.5.0" />
-    <PackageReference Include="NodaTime" Version="3.0.3" />
-    <PackageReference Include="UnitsNet" Version="4.82.0" />
+    <PackageReference Include="EPPlus" Version="5.8.6" />
+    <PackageReference Include="NodaTime" Version="3.0.9" />
+    <PackageReference Include="UnitsNet" Version="4.116.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="6.0.0" />
   </ItemGroup>
 
 </Project>
