@@ -1,12 +1,12 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <AssemblyName>HealthKitData.Core</AssemblyName>
     <RootNamespace>HealthKitData.Core</RootNamespace>
 
     <PackageId>HealthKitData.Core</PackageId>
-    <Version>0.3.0</Version>
+    <Version>0.4.0</Version>
     <Description>Library for handling HealthKit data and exporting it to Excel/CSV. Also facilitates loading a HealthKit "data export" file.</Description>
     <Authors>Jon Fuller</Authors>
     <PackageTags>HealthKit Fitness iOS Xamarin Excel CSV</PackageTags>
